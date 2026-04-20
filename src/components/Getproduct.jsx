@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Carousel from './Carousel';
 
 const Getproduct = () => {
     let navigate = useNavigate();
@@ -17,6 +18,8 @@ const Getproduct = () => {
             setProducts(response.data)
             setLoading("")
         } catch (error) {
+            setError(error.message)
+            setLoading("")
 
         }
     }
@@ -28,28 +31,37 @@ const Getproduct = () => {
     console.log(products)
     const imagepath = "http://mitchellekifaru.alwaysdata.net/static/images/"
     return (
-        <div className='container fluid'>
+        <div className='container fill '>
             <div className='row'>
-                <h1 className='text-success'>Available products</h1>
+                {/* carousel goes here  */}
+                <Carousel />
+                <h1 className='text-primary '>Available products</h1>
                 {/* bind the states  */}
                 <h2 className='text-warning text-center'> {loading} </h2>
                 <h2 className='text-danger text-center'> {error} </h2>
                 {products.map(singleproduct => (
-                    <div className="col-md-3 card shadow p-4 md-4">
-                        {/* image goes here  */}
-                        <img src={imagepath + singleproduct.product_photo} alt="" />
-                        {/* card body goes here  */}
-                        <div className="card-body">
-                            {/* product name goes here  */}
+                    <div className="col-md-3   md-4">
+                        <div className='card shadow h-100'>
 
-                            <h1>{singleproduct.product_name} </h1>
-                            {/* product description goes here  */}
-                            <p>{singleproduct.product_description}</p>
 
-                            {/* product cost goes here  */}
-                            <b className='text-warning'>{singleproduct.product_cost}</b><br />
-                            {/* purchase now button  */}
-                            <button className='btn btn-dark' onClick={()=>navigate("/makepayment",{state:{singleproduct}}) }>Purchase Now</button>
+                            {/* image goes here  */}
+                            <img src={imagepath + singleproduct.product_photo} alt="" style={{ height: "200px" }} />
+                            {/* card body goes here  */}
+                            <div className="card-body">
+                                {/* product name goes here  */}
+
+                                <h1>{singleproduct.product_name} </h1>
+                                {/* product description goes here  */}
+                                <p>{singleproduct.product_description}</p>
+
+                                {/* product cost goes here  */}
+                                <b className='text-primary'>{singleproduct.product_cost}</b><br />
+                                {/* purchase now button  */}
+
+
+
+                                <button className='btn btn-warning w-100' onClick={() => navigate("/makepayment", { state: { singleproduct } })} >Purchase Now</button>
+                            </div>
                         </div>
                     </div>
                 ))}

@@ -1,44 +1,46 @@
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Signup = () => {
   // declare our state here 
 
-  const[Username,setUsername] =useState("")
-  const[email,setEmail] =useState("")
-  const[password,setPassword] =useState("")
-  const[phone,setPhone] = useState ("")
+  const [Username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [phone, setPhone] = useState("")
 
   // three states for hosting data 
-  const[loading,setLoading]=useState("")
-  const[success,setSucces]= useState("")
-  const[error,setError]=useState("")
-   
+  const [loading, setLoading] = useState("")
+  const [success, setSucces] = useState("")
+  const [error, setError] = useState("")
+
   // function to handle submit 
-  const handlesubmit =async (e) =>{
+  const handlesubmit = async (e) => {
     e.preventDefault()
     setLoading("please wait...")
 
     // create an empty digital envelope 
     const formdata = new FormData()
-    formdata.append("username",Username)
-    formdata.append("email",email)
+    formdata.append("username", Username)
+    formdata.append("email", email)
     formdata.append("password", password)
-    formdata.append("phone",phone)
+    formdata.append("phone", phone)
     try {
-      const response =  await axios.post("http://mitchellekifaru.alwaysdata.net/api/signup",formdata)
+      const response = await axios.post("http://mitchellekifaru.alwaysdata.net/api/signup", formdata)
       setSucces(response.data.message)
       setLoading("")
     } catch (error) {
-      
+      setError(error.message)
+      setLoading("")
     }
 
-  }    
+  }
   return (
-    <div className="row mt-5 justify-content-center" >
+  
+    <div className="row mt-5 justify-content-center"  >
       <div className="col-md-6 card shadow">
-        <h1>Signup</h1>
+        <h1 className='text-info'> 👤 Signup</h1>
 
         {/* bind the states  */}
 
@@ -47,13 +49,13 @@ const Signup = () => {
         <h2 className="text-danger">{error}</h2>
 
         <form action="" onSubmit={handlesubmit}>
-          <input type="text" placeholder='Enter Username' className='form-control' onChange={(e)=>setUsername(e.target.value)}/> <br />
-          <input type="email" placeholder='Enter Email' className='form-control' onChange={(e)=>setEmail(e.target.value)} /> <br />
-          <input type="password" placeholder='Enter Password' className='form-control' onChange={(e)=> setPassword(e.target.value)}/> <br />
-          <input type="number"  placeholder='Enter Phone' className='form-control' onChange={(e) =>setPhone(e.target.value)}/> <br />
+          <input type="text" placeholder=' 👤 Enter Username' className='form-control' onChange={(e) => setUsername(e.target.value)} /> <br />
+          <input type="email" placeholder=' 📤 Enter Email' className='form-control' onChange={(e) => setEmail(e.target.value)} /> <br />
+          <input type="password" placeholder='🔑 Enter Password' className='form-control' onChange={(e) => setPassword(e.target.value)} /> <br />
+          <input type="number" placeholder=' 📲Enter Phone' className='form-control' onChange={(e) => setPhone(e.target.value)} /> <br />
 
           <button type='submit' className='btn btn-info w-100'>Signup</button> <br />
-          <p>Already have an account?   <Link to="/signin"> signin</Link></p>
+          <p className='text-info'>Already have an account?   <Link to="/signin"> signin</Link></p>
         </form>
       </div>
 
@@ -61,4 +63,4 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default Signup 

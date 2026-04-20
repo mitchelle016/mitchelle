@@ -1,7 +1,9 @@
-import logo from './logo.svg';
+
 import './App.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+
 
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Signup from './components/Signup';
@@ -9,15 +11,16 @@ import Signin from './components/Signin';
 import Addproduct from './components/Addproduct';
 import Getproduct from './components/Getproduct';
 import Makepayment from './components/Makepayment';
+import Footer from './components/Footer';
 function App() {
   return (
 
     <BrowserRouter>
     
-    <div className="App">
+    <div className="App full-height">
       <header className="App-header">
        
-        <h1>Welcome to Sokogarden</h1>
+        <h1>welcome to Killi Home Essentials</h1>
       </header>
       <nav>
         <Link to="/signup" className='btn btn-primary m-3' > Signup</Link>
@@ -37,6 +40,7 @@ function App() {
 
 
       </Routes>
+      <Footer/>
     </div>
     </BrowserRouter>
   );
