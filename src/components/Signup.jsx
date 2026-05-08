@@ -83,7 +83,7 @@ const Signup = () => {
           }
           <input type="number" placeholder=' 📲Enter Phone' className='form-control' onChange={(e) => setPhone(e.target.value)} /> <br />
 
-          <button type='submit' className='btn btn-info w-100 '   >Signup</button> <br />
+          <button type='submit' className='btn btn-info w-100 '   >Signup</button>  <br />
           <p className='text-info'>Already have an account?   <Link to="/signin"> signin</Link></p>
         </form>
       </div>
