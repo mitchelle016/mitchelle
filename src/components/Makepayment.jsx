@@ -35,10 +35,10 @@ const Makepayment = () => {
 
 return (
     <div className="row justify-content-center">
-        <h1>Make payment-LIpa Na Mpesa</h1>
-        <div className='col-md-8 card shadow p-4'>
+        <h1 className='text-success'>Make payment-LIpa Na Mpesa</h1>
+        <div className='col-md-8 card shadow p-4 '>
             {/* image goes here  */}
-            <img src={imagepath + singleproduct.product_photo} alt="" style={{ height: "700px", objectFit: "fill" }} />
+            <img src={imagepath + singleproduct.product_photo} alt="" style={{ height: "700px", objectFit: "contain" }} />
 
 
             <h3 className='text-warning text-start'> {singleproduct.product_name} </h3>
@@ -50,7 +50,7 @@ return (
             <h2 className='text-danger'> {error} </h2>
 
             <form action="" onSubmit={handlesubmit}>
-                <input type="number" className='form-control' placeholder='Enter phone 254xxxxxxxxx' onChange={(e) => setPhone(e.target.value)} /> <br />
+                <input type="number" className='form-control' placeholder='Enter phone 254xxxxxxxxx' onChange={(e) => setPhone(e.target.value)} required /> <br />
                 <button className='btn btn-success w-100' type='submit'>Make Payment</button>
             </form>
 

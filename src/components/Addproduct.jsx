@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React, {useState } from 'react'
+import React, { useState } from 'react'
+import Chatbot from './KilliChatbot'
 
 const Addproduct = () => {
     // declare our states here 
@@ -13,18 +14,18 @@ const Addproduct = () => {
     const [error, setError] = useState("")
 
     // function to handle submit 
-    const handlesubmit=async(e)=>{
+    const handlesubmit = async (e) => {
         e.preventDefault()
         setLoading("please wait ...")
         // create an empty digital envelope 
-        const formdata = new FormData ()
-        formdata.append("product_name",product_name)
-        formdata.append("product_ description",product_description)
-        formdata.append("product_cost",product_cost)
-        formdata.append("product_photo",product_photo)
+        const formdata = new FormData()
+        formdata.append("product_name", product_name)
+        formdata.append("product_ description", product_description)
+        formdata.append("product_cost", product_cost)
+        formdata.append("product_photo", product_photo)
 
         try {
-            const response =  await axios.post("http://mitchellekifaru.alwaysdata.net/api/add_product",formdata )
+            const response = await axios.post("http://mitchellekifaru.alwaysdata.net/api/add_product", formdata)
             setSucces(response.data.message)
             setLoading("")
         } catch (error) {
@@ -34,7 +35,7 @@ const Addproduct = () => {
     }
     return (
         <div className='row justify-content-center mt-2'>
-            <div className='col-md-8 card shadow p-4'>
+            <div className='col-md-8 card shadow p-4 bg-dark'>
                 <h1 className='text-success'> Add product</h1>
                 {/* bind the states  */}
 

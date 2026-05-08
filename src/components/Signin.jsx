@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const Signin = () => {
     // declare the states here  
     const [email, setEmail] = useState("")
@@ -10,6 +10,7 @@ const Signin = () => {
     const [loading, setLoading] = useState("")
     const [success, setSucces] = useState("")
     const [error, setError] = useState("")
+    const navigate = useNavigate()
 
     // function to handle submit 
     const handlesubmit = async (e) => {
@@ -26,6 +27,11 @@ const Signin = () => {
             setSucces(response.data.message)
             setLoading("")
 
+            if (response.data.user) {
+                localStorage.setItem("user", JSON.stringify(response.data.user))
+                navigate("/")
+            }
+
         } catch (error) {
             setError(error.message)
             setLoading("")
@@ -35,7 +41,7 @@ const Signin = () => {
 
     return (
         <div className="row mt-5 justify-content-center">
-            <div className="col-md-6 card shadow">
+            <div className="col-md-6 card shadow bg-dark">
 
                 <h1 className="text-success"> 👤 Signin</h1>
                 {/* bind the states  */}
@@ -43,10 +49,10 @@ const Signin = () => {
                 <h4 className="text-success"> {success} </h4>
                 <h4 className="text-danger"> {error} </h4>
 
-                <form action="" onSubmit={handlesubmit}>
+                <form action=""  onSubmit={handlesubmit} >
                     <input type="email" placeholder="  📤 Email" className="form-control" onChange={(e) => setEmail(e.target.value)} /> <br />
                     <input type="password" placeholder=" 🔑  password" className="form-control" onChange={(e) => setPassword(e.target.value)} /><br />
-                    <button type="submit" className=" btn btn-primary w-100 ">Signin</button>
+                    <button type="submit" className=" btn btn-primary w-100 "  >Signin</button>
                     <p className="text-success">Don't have an account? <Link to="/signup">Signup</Link>
                     </p>
                 </form>
